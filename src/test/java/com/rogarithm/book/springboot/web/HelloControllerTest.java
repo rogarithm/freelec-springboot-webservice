@@ -2,6 +2,7 @@ package com.rogarithm.book.springboot.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
@@ -27,4 +28,17 @@ public class HelloControllerTest {
                 .andExpect(content().string(hello));
     }
 
+    @Test
+    public void returnsHelloDto() throws Exception {
+        String name = "hello";
+        int amount = 1000;
+
+        mvc.perform(get("/hello/dto")
+                                .param("name", name)
+                                .param("amount", String.valueOf(amount)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.amount").value(amount))
+                .andExpect(jsonPath("$.name").value(name));
+
+    }
 }
