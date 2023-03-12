@@ -14,7 +14,7 @@ public class PostsController {
 
     private final PostsService postsService;
 
-    @RequestMapping(path = "/api/v1/posts", method = RequestMethod.PUT)
+    @RequestMapping(path = "/api/v1/posts", method = RequestMethod.POST)
     public Long save(@RequestBody PostsSaveRequestDto requestDto) {
         return postsService.save(requestDto);
     }
